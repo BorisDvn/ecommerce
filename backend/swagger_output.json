@@ -1,0 +1,653 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.1",
+    "title": "Ecommerce backend API",
+    "description": "Ecommerce backend API with Express"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/orders/": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "description": "Fetch all orders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "all orders",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 132
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "PEGASUS 33"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "The Zoom Pegasus ...."
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 59.99
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "No orders found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No orders found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/{id}": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "description": "Get Single Order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "all orders",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 174
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "PEGASUS 33 Running Shoes For Men"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "The Nike Zoom Pegasus Turbo 2 is updated with a feather-light upper, while innovative foam brings revolutionary responsiveness to your long-distance training"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 59.99
+                  },
+                  "image": {
+                    "type": "string",
+                    "example": "https://i.pinimg.com/originals/43/40/8e/43408ee5a8d234752ecf80bbc3832e65.jpg"
+                  },
+                  "quantityOrdered": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/new": {
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "description": "Place New Order",
+        "parameters": [
+          {
+            "name": "prodId",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "products": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "user & products"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/orders/payment": {
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "description": "Payment Gateway - Timeout 8000 😶 ㄟ( ▔, ▔ )ㄏ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/products/": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "Fetch all products",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Query Parameter",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "set limit of items per page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ALL PRODUCTS"
+          }
+        }
+      }
+    },
+    "/api/products/{prodId}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "GET ONE PRODUCT",
+        "parameters": [
+          {
+            "name": "prodId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ONE PRODUCT",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "example": "Electronics"
+                },
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "PlayStation 4"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 240.99
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 0
+                },
+                "description": {
+                  "type": "string",
+                  "example": "With PS4, gaming becomes a lot more power packed. Ultra-fast processors, high-performance system, real-time game sharing, remote play and lots more makes it the ultimate companion device."
+                },
+                "image": {
+                  "type": "string",
+                  "example": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSr-iFW5W8n3_jxNKiclAP_k71Fi9PGcojsMUC-vb8zbwJthbBd"
+                },
+                "images": {
+                  "type": "string",
+                  "example": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSr-iFW5W8n3_jxNKiclAP_k71Fi9PGcojsMUC-vb8zbwJthbBd;  https://static.toiimg.com/thumb/msid-56933980,width-640,resizemode-4,imgsize-85436/56933980.jpg;  https://cdn.mos.cms.futurecdn.net/3328be45e8c7fe5194055b4c687fb769-1200-80.jpeg;  https://img.etimg.com/thumb/width-640,height-480,imgsize-76492,resizemode-1,msid-52464286/46.jpg"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/category/{catName}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "description": "GET ALL PRODUCTS FROM ONE CATEGORY",
+        "parameters": [
+          {
+            "name": "catName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "category name"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Query Parameter",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "set limit of items per page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ALL PRODUCTS FROM ONE CATEGORY"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "description": "LOGIN",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user for login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "************"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user log",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "****************************"
+                },
+                "auth": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "email": {
+                  "type": "string",
+                  "example": "user@mail.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "firstName"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "lastName"
+                },
+                "photoUrl": {
+                  "type": "string",
+                  "example": "photoUrl.ulr.com"
+                },
+                "id": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "description": "REGISTER",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user for login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "***********"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Leo"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Edward"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User successfully reg.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Registration successful."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "433": {
+            "description": "User reg error"
+          },
+          "501": {
+            "description": "User reg failed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Registration failed."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "description": "Fetch all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ALL users",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "example": "edward"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "edward@email.com"
+                      },
+                      "fname": {
+                        "type": "string",
+                        "example": "Leo"
+                      },
+                      "lname": {
+                        "type": "string",
+                        "example": "Edward"
+                      },
+                      "age": {
+                        "type": "number",
+                        "example": 18
+                      },
+                      "role": {
+                        "type": "string",
+                        "example": "username"
+                      },
+                      "id": {
+                        "type": "number",
+                        "example": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "description": "GET ONE user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "user ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ONE user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "edward"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "edward@email.com"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Leo"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Edward"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 18
+                },
+                "role": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "id": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "USER NOT FOUND",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "USER NOT FOUND"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "description": "UPDATE USER DATA",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "user ID"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user for login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "edward"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "edward@email.com"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Leo"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Edward"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 18
+                },
+                "role": {
+                  "type": "string",
+                  "example": "username"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User updated successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    }
+  }
+}
